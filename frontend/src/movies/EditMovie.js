@@ -16,17 +16,18 @@ export default function EditMovie() {
     const {name,description,rating} = movie;
 
     const onInputChange = (e) =>{
-        SetMovie({...movie,[e.target.name]:e.target.value});
+        setMovie({...movie,[e.target.name]:e.target.value});
     };
 
     useEffect(()=>{
-        loadUser()
+        loadMovie()
     },[])
     const onSubmit = async(e) =>{
         e.preventDefault()
         await axios.put(`http://localhost:3000/movies/${id}`,movie);
         navigate("/")
     }
+    
     const loadMovie = async () =>{
         const result = await axios.get(`http://localhost:3000/movies/${id}`)
         setMovie(result.data)
