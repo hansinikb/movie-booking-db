@@ -1,18 +1,26 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function Home() {
 
     const [movies,setMovies]=useState([]);
-    useEffect(()=>{
+
+    const {id} = useParams()
+
+    useEffect(()=>{ 
         loadMovies();
     },[]);
 
     const loadMovies = async() =>{
         const result = await axios.get("http://localhost:3000/movies")
         setMovies(result.data)
-    }
+    };
+
+    const deleteMovie = async(id) =>{
+        await axios.delete(`http://localhost:3000/movies/${id}`)
+        loadMovies()
+    };
 
     return (
         <div className='container'>
@@ -39,8 +47,8 @@ export default function Home() {
                                     <td>{movie.rating}</td>
                                     <td>
                                         <button className='btn btn-primary mx-2'>View</button>
-                                        <button className='btn btn-outline-primary mx-2'>Edit</button>
-                                        <button className='btn btn-danger mx-2'>Delete</button>
+                                        <Link className='btn btn-outline-primary mx-2' to={`/editmovie/${movie.id}`}>Edit</Link>
+                                        <button className='btn btn-danger mx-2' onClick={()=>deleteMovie(movie.id)}>Delete</button>
                                     </td>
                                 </tr>
                                 
