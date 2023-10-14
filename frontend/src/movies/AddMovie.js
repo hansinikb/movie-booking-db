@@ -16,7 +16,7 @@ export default function AddMovie() {
     const {name,description,rating} = movie;
 
     const onInputChange = (e) =>{
-        SetMovie({...movie,[e.target.name]:e.target.value});
+        setMovie({...movie,[e.target.name]:e.target.value});
     };
 
     const onSubmit = async(e) =>{
