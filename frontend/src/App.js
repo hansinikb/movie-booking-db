@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route exact path = "/" element= {<Home/>}/>
           <Route exact path = "/addMovie" element= {<AddMovie/>}/>
-          <Route exact path = "/edituse/:id" element = {<EditMovie/>} />
+          <Route exact path = "/editmovie/:id" element = {<EditMovie/>} />
         </Routes>
       </Router>
       
@@ -23,3 +23,4 @@ function App() {
 }
 
 export default App;
+
