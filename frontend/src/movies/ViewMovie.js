@@ -23,7 +23,7 @@ export default function ViewMovie() {
         <div className='container'>
             <div className='row'>
                 <h2 className='tect-center m-4'>View Movies</h2>
-                <div className='col-md-9 offset-md-2 border rounded p-4 mt-2 shadow'></div>
+                <div className='col-md-9 offset-md-2 border rounded p-4 mt-2 shadow'>hello</div>
                 <div className='card'>
                     <div className='card-header'>
                         Details of the movie: {movie.id}
@@ -31,6 +31,18 @@ export default function ViewMovie() {
                             <li className='list-group-item'>
                                 <b>Name: </b>
                                 {movie.name}
+                            </li>
+                            <li className='list-group-item'>
+                                <b>Director: </b>
+                                {movie.director}
+                            </li>
+                            <li className='list-group-item'>
+                                <b>Language: </b>
+                                {movie.language}
+                            </li>
+                            <li className='list-group-item'>
+                                <b>Genres: </b>
+                                {movie.genre}
                             </li>
                             <li className='list-group-item'>
                                 <b>Description: </b>
