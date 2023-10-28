@@ -4,20 +4,20 @@ import { Link, useParams } from 'react-router-dom';
 
 export default function Home() {
 
-    const [movies,setMovies]=useState([]);
+    const [movies, setMovies] = useState([]);
 
-    const {id} = useParams()
+    useParams()
 
-    useEffect(()=>{ 
+    useEffect(() => {
         loadMovies();
-    },[]);
+    }, []);
 
-    const loadMovies = async() =>{
+    const loadMovies = async () => {
         const result = await axios.get("http://localhost:3000/movies")
         setMovies(result.data)
     };
 
-    const deleteMovie = async(id) =>{
+    const deleteMovie = async (id) => {
         await axios.delete(`http://localhost:3000/movies/${id}`)
         loadMovies()
     };
@@ -28,45 +28,52 @@ export default function Home() {
                 <Link className="btn btn-outline-light" to="/addMovie">Add Movie</Link>
             </div>
             <div className='py-4'>
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Rating</th>
-                        </tr>
-                    </thead>
-                    <tbody className="table-group-divider">
-                        {
-                            movies.map((movie,index)=>(
-                                <tr>
-                                    <th scope="row" key = {index}>{index+1}</th>
-                                    <td>{movie.name}</td>
-                                    <td>{movie.description}</td>
-                                    <td>{movie.rating}</td>
-                                    <td>
+
+
+                {
+                    movies.map((movie, index) => (
+                        <div class="card mb-3" style={{ maxWidth: "540px" }}>
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src={movie.img} class="img-fluid rounded-start" alt="..." />
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{movie.title}</h5>
+                                        <p class="card-text">{movie.description}</p>
+                                        <p class="card-text"><small class="text-body-secondary">{movie.director}</small></p>
+                                        <p class="card-text"><small class="text-body-secondary">{movie.language}</small></p>
+                                        <p class="card-text"><small class="text-body-secondary">{movie.genre}</small></p>
                                         <button className='btn btn-primary mx-2'>View</button>
                                         <Link className='btn btn-outline-primary mx-2' to={`/editmovie/${movie.id}`}>Edit</Link>
-                                        <button className='btn btn-danger mx-2' onClick={()=>deleteMovie(movie.id)}>Delete</button>
-                                    </td>
-                                </tr>
-                                
-                            ))
-                            }
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>movie.name</td>
-                            <td>movie.description</td>
-                            <td>movie.rating</td>
-                            <td>
+                                        <button className='btn btn-danger mx-2' onClick={() => deleteMovie(movie.id)}>Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+                <div class="card mb-3" style={{ maxWidth: "540px" }}>
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="..." class="img-fluid rounded-start" alt="..." />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">movie.title</h5>
+                                <p class="card-text">movie.description</p>
+                                <p class="card-text"><small class="text-body-secondary">movie.director</small></p>
+                                <p class="card-text"><small class="text-body-secondary">movie.language</small></p>
+                                <p class="card-text"><small class="text-body-secondary">movie.genre</small></p>
                                 <button className='btn btn-primary mx-2'>View</button>
-                                <button className='btn btn-outline-primary mx-2'>Edit</button>
+                                <Link className='btn btn-outline-primary mx-2' to={`/editmovie/1`}>Edit</Link>
                                 <button className='btn btn-danger mx-2'>Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     )

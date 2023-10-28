@@ -7,16 +7,17 @@ export default function AddMovie() {
     let navigate = useNavigate()
 
     const[movie, setMovie] = useState({
-        name: "",
-        description: "",
-        rating: "",
-
+        title: "",
+        genre: "",
+        director: "",
+        language:"",
+        description:""
     });
 
-    const {name,description,rating} = movie;
+    const {title,genre,director,language, description} = movie;
 
     const onInputChange = (e) =>{
-        setMovie({...movie,[e.target.name]:e.target.value});
+        setMovie({...movie,[e.target.title]:e.target.value});
     };
 
     const onSubmit = async(e) =>{
@@ -32,37 +33,34 @@ export default function AddMovie() {
                 <div className='col-md-9 offset-md-2 border rounded p-4 mt-2 shadow'>
                     <form onSubmit={(e)=>onSubmit(e)}>
                     <div className="input-group mb-3">
-                        <span htmlFor="Name" className="input-group-text">Name</span>
-                        <input type="text" className="form-control" placeholder='Name of movie' name="name" value={name} onChange={(e)=>onInputChange(e)}/>
+                        <span htmlFor="Name" className="input-group-text">Title</span>
+                        <input type="text" className="form-control" placeholder='Name of movie' name="name" value={title} onChange={(e)=>onInputChange(e)}/>
                     </div>
+
+                    <div className="input-group mb-3">
+                        <span htmlFor="Director" className="input-group-text">Director</span>
+                        <input type="text" className="form-control" placeholder='Director of movie' name="name" value={director} onChange={(e)=>onInputChange(e)}/>
+                    </div>
+
+                    <div className="input-group mb-3">
+                        <span htmlFor="Language" className="input-group-text">Language</span>
+                        <input type="text" className="form-control" placeholder='Language of movie' name="name" value={language} onChange={(e)=>onInputChange(e)}/>
+                    </div>
+
+                    <div className="input-group mb-3">
+                        <span htmlFor="Genre" className="input-group-text">Genre</span>
+                        <select multiple className="form-select" value={genre} onChange={(e) => onInputChange(e)}>
+                            <option value="English">Thriller</option>
+                            <option value="Spanish">Mystery</option>
+                            <option value="French">Adventure</option>
+                            <option value="French">Romance</option>
+                            <option value="French">Animated</option>
+                        </select>
+                    </div>
+
                     <div className="input-group mb-3">
                         <span htmlFor="Name" className="input-group-text pt-4 pb-4">Description</span>
                         <input type="text" className="form-control" placeholder='Movie description' name="desc" value = {description}/>
-                    </div>
-                    <div className="input-group mb-3">
-                        <span htmlFor="Name" className="input-group-text">Rating</span>
-                        <div className='p-2'>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rating" value="1" />
-                                <label class="form-check-label" for="inlineRadio1">1</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rating" value="2" />
-                                <label class="form-check-label" for="inlineRadio2">2</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rating" value="3" />
-                                <label class="form-check-label" for="inlineRadio1">3</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rating" value="4" />
-                                <label class="form-check-label" for="inlineRadio2">4</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="rating" value="5" />
-                                <label class="form-check-label" for="inlineRadio1">5</label>
-                            </div>
-                        </div>
                     </div>
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
                     <Link type="submit" className='btn btn-outline-danger mx-2' to="/">Cancel</Link>
