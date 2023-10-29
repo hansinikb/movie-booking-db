@@ -1,63 +1,74 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import axios from 'axios';
 
 export default function ViewMovie() {
 
-    const [user,setUser] = useState({
-        name:"",
-        description:"",
-        rating:""
-    })
-    const{id} = useParams();
+    const [movie, setMovie] = useState({})
+    const { movie_id } = useParams();
 
-    useEffect(()=>{
-        loadUser()
-    },[])
-    const loadUser = async() =>{
-        const result = await axios.get(`http://localhost:3000/movies/${id}`)
-        setUser(result.data)
-    }
+    const [showtimes, setShowtimes] = useState([]);
 
-  return (
-    <div>
-        <div className='container'>
-            <div className='row'>
-                <h2 className='tect-center m-4'>View Movies</h2>
-                <div className='col-md-9 offset-md-2 border rounded p-4 mt-2 shadow'>hello</div>
-                <div className='card'>
-                    <div className='card-header'>
-                        Details of the movie: {movie.id}
-                        <ul className='list-group list-group-flush'>
-                            <li className='list-group-item'>
-                                <b>Name: </b>
-                                {movie.name}
-                            </li>
-                            <li className='list-group-item'>
-                                <b>Director: </b>
-                                {movie.director}
-                            </li>
-                            <li className='list-group-item'>
-                                <b>Language: </b>
-                                {movie.language}
-                            </li>
-                            <li className='list-group-item'>
-                                <b>Genres: </b>
-                                {movie.genre}
-                            </li>
-                            <li className='list-group-item'>
-                                <b>Description: </b>
-                                {movie.description}
-                            </li>
-                            <li className='list-group-item'>
-                                <b>Rating: </b>
-                                {movie.rating}
-                            </li>
-                        </ul>
+
+
+    useEffect(() => {
+        const fetchShowtimesAndMovie = async () => {
+          try {
+            const response = await axios.get(`http://localhost:3000/viewmovie/${movie_id}`);
+            const filteredShowtimes = response.data.filter(
+              (showtime) => showtime.movieID === movie_id
+            );
+            setShowtimes(filteredShowtimes);
+    
+            const movieResponse = await axios.get(
+                `http://localhost:3000/viewmovie/${movie_id}`
+            );
+            setMovie(movieResponse.data);
+          } catch (error) {
+            console.error('Error fetching data: ', error);
+          }
+        };
+    
+        fetchShowtimesAndMovie();
+      }, [movie_id]);
+
+    return (
+        <div>
+            <div className='container'>
+                <div className='row'>
+                    <h2 className='tect-center m-4'>Available showtimes for movie.title</h2>
+                    <div className='col-md-9 offset-md-2 border rounded p-4 mt-2 shadow'>
+                    <div className='py-4'>
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Theatre Name</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Showtime</th>
+                                </tr>
+                            </thead>
+                            <tbody className="table-group-divider">
+                                {showtimes.map((showtime, index) => (
+                                    <tr key={index}>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>{showtime.theater.name}</td>
+                                        <td>{showtime.theater.location}</td>
+                                        <td>{showtime.date}</td>
+                                        <td>{showtime.startTime + ' - ' + showtime.endTime}</td>
+                                        <td>
+                                            <button className='btn btn-primary mx-2'>Book</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <Link className='btn btn-primary my-2 p-2 ' to={"/"}>Back to Home</Link>
                     </div>
                 </div>
-                <Link className='btn btn-primary my-2' to= {"/"}>Back to Home</Link>
             </div>
         </div>
-    </div>
-  )
+    )
 }

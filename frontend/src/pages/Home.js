@@ -41,9 +41,9 @@ export default function Home() {
                                     <div class="card-body">
                                         <h5 class="card-title">{movie.title}</h5>
                                         <p class="card-text">{movie.description}</p>
-                                        <p class="card-text"><small class="text-body-secondary">{movie.director}</small></p>
-                                        <p class="card-text"><small class="text-body-secondary">{movie.language}</small></p>
-                                        <p class="card-text"><small class="text-body-secondary">{movie.genre}</small></p>
+                                        <p class="card-text"><small class="text-body-secondary">Director: {movie.director}</small></p>
+                                        <p class="card-text"><small class="text-body-secondary">Language: {movie.language}</small></p>
+                                        <p class="card-text"><small class="text-body-secondary">Genres: {movie.genre}</small></p>
                                         <button className='btn btn-primary mx-2'>View</button>
                                         <Link className='btn btn-outline-primary mx-2' to={`/editmovie/${movie.id}`}>Edit</Link>
                                         <button className='btn btn-danger mx-2' onClick={() => deleteMovie(movie.id)}>Delete</button>
