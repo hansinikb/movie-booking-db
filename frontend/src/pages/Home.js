@@ -25,7 +25,7 @@ export default function Home() {
     return (
         <div className='container'>
             <div className='py-2'>
-                <Link className="btn btn-outline-light" to="/addMovie">Add Movie</Link>
+                <Link className="btn btn-outline-dark" to="/addMovie">Add Movie</Link>
             </div>
             <div className='py-4'>
 

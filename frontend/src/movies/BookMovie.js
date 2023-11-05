@@ -116,13 +116,13 @@ export default function BookMovie() {
       </div>
       <div className='col-md-6 offset-md-3 p-10 mt-25 shadow'>
         <div>
-          <h3><span className="badge bg-light">Selected Seats</span>
+          <h3><span className="card-body">Selected Seats: </span>
             {selectedSeats.map((seat, index) => (
               <span key={index}>{seat} </span>
             ))}</h3>
         </div>
 
-        <h3><span className="badge bg-light">Total Price: </span> ${totalPrice}</h3>
+        <h3><span className="card-body">Total Price: </span> ${totalPrice}</h3>
 
         <select className="form-select m-3 w-50 align-items-center mx-auto" aria-label="Payment method" placeholder='Payment method' onChange={handlePaymentSelection} required >
           <option value="credit card">Credit Card</option>
