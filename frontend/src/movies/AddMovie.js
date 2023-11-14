@@ -6,23 +6,24 @@ export default function AddMovie() {
 
     let navigate = useNavigate()
 
-    const[movie, setMovie] = useState({
+    const [movie, setMovie] = useState({
         title: "",
         genre: "",
         director: "",
-        language:"",
-        description:""
+        language: "",
+        description: "",
+        // image : null
     });
 
-    const {title,genre,director,language, description} = movie;
+    const { title, genre, director, language, description } = movie;
 
-    const onInputChange = (e) =>{
-        setMovie({...movie,[e.target.title]:e.target.value});
+    const onInputChange = (e) => {
+        setMovie({ ...movie, [e.target.name]: e.target.value });
     };
 
-    const onSubmit = async(e) =>{
+    const onSubmit = async (e) => {
         e.preventDefault()
-        await axios.post("http://localhost:3000/movies",movie);
+        await axios.post("http://localhost:8080/movie", movie);
         navigate("/")
     }
 
@@ -31,39 +32,46 @@ export default function AddMovie() {
             <div className='row'>
                 <h2 className='tect-center m-4'>Add Movie</h2>
                 <div className='col-md-9 offset-md-2 border rounded p-4 mt-2 shadow'>
-                    <form onSubmit={(e)=>onSubmit(e)}>
-                    <div className="input-group mb-3">
-                        <span htmlFor="Name" className="input-group-text">Title</span>
-                        <input type="text" className="form-control" placeholder='Name of movie' name="name" value={title} onChange={(e)=>onInputChange(e)}/>
-                    </div>
+                    <form onSubmit={(e) => onSubmit(e)}>
+                        <div className="input-group mb-3">
+                            <span htmlFor="Name" className="input-group-text">Title</span>
+                            <input type="text" className="form-control" placeholder='Name of movie' name="title" value={title} onChange={(e) => onInputChange(e)} />
+                        </div>
 
-                    <div className="input-group mb-3">
-                        <span htmlFor="Director" className="input-group-text">Director</span>
-                        <input type="text" className="form-control" placeholder='Director of movie' name="name" value={director} onChange={(e)=>onInputChange(e)}/>
-                    </div>
+                        <div className="input-group mb-3">
+                            <span htmlFor="Director" className="input-group-text">Director</span>
+                            <input type="text" className="form-control" placeholder='Director of movie' name="director" value={director} onChange={(e) => onInputChange(e)} />
+                        </div>
 
-                    <div className="input-group mb-3">
-                        <span htmlFor="Language" className="input-group-text">Language</span>
-                        <input type="text" className="form-control" placeholder='Language of movie' name="name" value={language} onChange={(e)=>onInputChange(e)}/>
-                    </div>
+                        <div className="input-group mb-3">
+                            <span htmlFor="Language" className="input-group-text">Language</span>
+                            <input type="text" className="form-control" placeholder='Language of movie' name="language" value={language} onChange={(e) => onInputChange(e)} />
+                        </div>
 
-                    <div className="input-group mb-3">
-                        <span htmlFor="Genre" className="input-group-text">Genre</span>
-                        <select multiple className="form-select" value={genre} onChange={(e) => onInputChange(e)}>
-                            <option value="English">Thriller</option>
-                            <option value="Spanish">Mystery</option>
-                            <option value="French">Adventure</option>
-                            <option value="French">Romance</option>
-                            <option value="French">Animated</option>
-                        </select>
-                    </div>
+                        <div className="input-group mb-3">
+                            <span htmlFor="Genre" className="input-group-text">Genre</span>
+                            {/* select multiple */}
+                            <select className="form-select" value={genre} name="genre" onChange={(e) => onInputChange(e)}>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Mystery">Mystery</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Animated">Animated</option>
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Sci-Fi">Sci-fi</option>
+                            </select>
+                        </div>
+                        {/* <div className='input-group mb-3'>
+                            <span htmlFor='Image' className='input-group-text'>Upload image</span>
+                            <input type='file' className='form-control' value={image} name='image' onChange={(e) => onInputChange(e)}/>
+                        </div> */}
 
-                    <div className="input-group mb-3">
-                        <span htmlFor="Name" className="input-group-text pt-4 pb-4">Description</span>
-                        <input type="text" className="form-control" placeholder='Movie description' name="desc" value = {description}/>
-                    </div>
-                    <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                    <Link type="submit" className='btn btn-outline-danger mx-2' to="/">Cancel</Link>
+                        <div className="input-group mb-3">
+                            <span htmlFor="Name" className="input-group-text pt-4 pb-4">Description</span>
+                            <input type="text" className="form-control" placeholder='Movie description' name="description" value={description} onChange={(e) => onInputChange(e)} />
+                        </div>
+                        <button type="submit" className='btn btn-outline-primary'>Submit</button>
+                        <Link type="submit" className='btn btn-outline-danger mx-2' to="/">Cancel</Link>
                     </form>
                 </div>
             </div>
