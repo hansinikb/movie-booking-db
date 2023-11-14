@@ -1,35 +1,53 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams,useNavigate} from 'react-router-dom';
 
-export default function Login() {
-        const [user, setUser] = useState({});
-        const { user_id } = useParams();
+export default function Login({handleLogin}) {
+        const [customer, setCustomer] = useState({
+            customerid:"",
+            name:""
+        });
+        let navigate = useNavigate()
+        const { customerid } = useParams();
         const [error, setError] = useState('');
         const [email, setEmail] = useState('');
+        const auth = localStorage.getItem('username')
+        const [loggedIn, setLoggedIn] = useState(!!auth);
       
-        useEffect(() => {
-          const fetchUser = async () => {
+        // useEffect(() => {
+        //   if (email) {
+        //     fetchUser(); // Call the fetchUser function only if the email is present
+        // }
+        // }, [email]);
+
+        const fetchUser = async () => {
             try {
-              const response = await axios.get(`http://localhost:3000/${user_id}`);
-              setUser(response.data);
-            } catch (error) {
-              if ( error.response.status === 404 && error.response) {
-                setError('Invalid email or password. Please try again.'); 
+              // Fetch all customers from the server
+              const response = await axios.get('http://localhost:8080/customer');
+
+              // Find the customer with the matching email
+              const customer = response.data.find(cust => cust.email === email);
+          
+              if (customer) {
+                // Set the customer data
+                setCustomer(customer);
+                setLoggedIn(true);
+                localStorage.setItem('username', customer.name);
+                navigate('/')
               } else {
-                console.error('Error fetching data: ', error);
+                // If no matching customer is found, handle it accordingly
+                setError('Customer not found. Please try again.');
               }
+            } catch (error) {
+              // Handle other errors
+              console.error('Error fetching data: ', error);
             }
           };
-      
-          if (email) {
-            fetchUser(); // Call the fetchUser function only if the email is present
-          }
-        }, [email]);
-
+          
         const handleEmailChange = (e) => {
             setEmail(e.target.value); // Update the email state when the input changes
           };
+
 
     return (
         <section className="vh-100">
@@ -60,11 +78,11 @@ export default function Login() {
 
                                             <div className="form-outline mb-4">
                                                 <input type="password" id="form2Example27" className="form-control form-control-lg" />
-                                                <label className="form-label" for="form2Example27">Password</label>
+                                                <label className="form-label" htmlFor="form2Example27">Password</label>
                                             </div>
 
                                             <div className="pt-1 mb-4">
-                                                <button className="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                                <button className="btn btn-dark btn-lg btn-block" type="button" onClick={fetchUser}>Login</button>
                                             </div>
                                             <div>{error && (<p className="error text-warning"> {error} </p>)}</div>
                                             <p className="mb-5 pb-lg-2">Don't have an account? <Link to = "/register">Register here</Link></p>

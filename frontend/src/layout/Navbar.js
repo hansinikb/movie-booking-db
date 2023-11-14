@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
- 
+import { Link ,useNavigate} from 'react-router-dom';
+
+
 export default function Navbar() {
+    const auth = localStorage.getItem('username')
+    const onLogout = () =>{
+        localStorage.removeItem('username')
+        navigate('/')
+    }
+    let navigate = useNavigate()
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -18,16 +25,28 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Venues</a>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <a className="nav-link disabled" aria-disabled="true">Food Options</a>
-                            </li>
+                            </li> */}
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-3" type="search" placeholder="Search" aria-label="Search"/>
-                                <button className="btn btn-primary mx-2" type="submit">Search</button> 
-                        </form>
-                        <Link className="btn btn-primary mx-2" type="submit" to="/login">Sign In</Link>
-
+                        {/* <form className="d-flex" role="search">
+                            <input className="form-control me-3" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-primary mx-2" type="submit">Search</button>
+                        </form> */}
+                        {auth ? (
+                            <ul className="navbar-nav ms-auto">
+                            <li>
+                                <p className='navbar-brand'>Welcome, {localStorage.getItem('username')}!</p>
+                            </li>
+                            <li>
+                                <button className="btn btn-primary mx-2" onClick={onLogout}>Logout</button>
+                            </li>
+                            </ul>
+                        ) : (
+                            <Link className="btn btn-primary mx-2" type="submit" to="/login">
+                                Sign In
+                            </Link>
+                        )}
                     </div>
                 </div>
             </nav>

@@ -28,10 +28,10 @@ export default function Home() {
             <div className='py-2'>
                 <Link className="btn btn-outline-dark" to="/addMovie">Add Movie</Link>
             </div>
-            <div className='py-4'>
+            <div className='py-4 row row-cols-1 row-cols-md-3 g-4'>
                 {
                     movies.map((movie, index) => (
-                        <div className="card" style={{ "width": "18rem" }}>
+                        <div className="card p-3 m-3" style={{ "width": "20rem" }}>
                             {/* <img src="..." className="card-img-top" alt="..." /> */}
                             <div className="card-body">
                                 <h5 className="card-title">{movie.title}</h5>
