@@ -44,7 +44,7 @@ export default function Home() {
                             </ul>
                             <div className="card-body">
 
-                                <button className='btn btn-primary mx-2'>View</button>
+                                <Link className='btn btn-primary mx-2' to={`/viewmovie/${movie.id}`}>View</Link>
                                 <Link className='btn btn-outline-primary mx-2' to={`/editmovie/${movie.id}`}>Edit</Link>
                                 <button className='btn btn-danger mx-2' onClick={() => deleteMovie(movie.id)}>Delete</button>
                             </div>
