@@ -69,13 +69,13 @@ public class Movie {
     //     this.showtimeList = showtimeList;
     // }
 
-    public Showtime getShowtime() {
-        return showtime;
-    }
+    // public Showtime getShowtime() {
+    //     return showtime;
+    // }
 
-    public void setShowtime(Showtime showtime) {
-        this.showtime = showtime;
-    }
+    // public void setShowtime(Showtime showtime) {
+    //     this.showtime = showtime;
+    // }
     //     public byte[] getImage() {
     //     return image;
     // }
@@ -93,8 +93,8 @@ public class Movie {
 
     // @OneToMany(cascade = CascadeType.ALL,mappedBy="movie")
     // private List<Showtime> showtimeList=new ArrayList<>() ;
-    @OneToOne(mappedBy="movie")
-    private Showtime showtime ;
+    // @OneToOne(mappedBy="movie")
+    // private Showtime showtime ;
 
 
 

@@ -49,7 +49,7 @@ public class MovieController {
                     movie.setDescription(newMovie.getDescription());
                     movie.setDirector(newMovie.getDirector());
                     movie.setLanguage(newMovie.getLanguage());
-                    movie.setShowtime(newMovie.getShowtime());
+                    //movie.setShowtime(newMovie.getShowtime());
                     // movie.setImage(newMovie.getImage());
                 
                     return movieRepository.save(movie);

@@ -48,7 +48,7 @@ public class ShowtimeController {
                     showtime.setDate(newShowtime.getDate());
                     showtime.setMovie(newShowtime.getMovie());
                     showtime.setTheatre(newShowtime.getTheatre());
-                    showtime.setBooking(newShowtime.getBooking());
+                    // showtime.setBooking(newShowtime.getBooking());
 
                     return showtimeRepository.save(showtime);
                 }).orElseThrow(() -> new UserNotFoundException(id));

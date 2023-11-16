@@ -43,8 +43,8 @@ public class TheatreController {
                     theatre.setName(newTheatre.getName());
                     theatre.setTheatreid(newTheatre.getTheatreid());
                     theatre.setLocation(newTheatre.getLocation());
-                    theatre.setScreen(newTheatre.getScreen());
-                    theatre.setShowtime(newTheatre.getShowtime());
+                    // theatre.setScreen(newTheatre.getScreen());
+                    // theatre.setShowtime(newTheatre.getShowtime());
 
 
                     return theatreRepository.save(theatre);

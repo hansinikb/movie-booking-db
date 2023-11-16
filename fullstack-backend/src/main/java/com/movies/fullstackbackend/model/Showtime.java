@@ -4,18 +4,31 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Showtime {
     @Id
     @GeneratedValue
     private Long showtimeid;
-    private LocalTime starttime;
-    private LocalTime endtime;
+    
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime starttime;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime endtime;
 
     public Long getShowtimeid() {
         return showtimeid;
@@ -65,13 +78,13 @@ public class Showtime {
         this.theatre = theatre;
     }
 
-    public Booking getBooking() {
-        return booking;
-    }
+    // public Booking getBooking() {
+    //     return booking;
+    // }
 
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
+    // public void setBooking(Booking booking) {
+    //     this.booking = booking; 
+    // }
 
     //    @ManyToMany
 //    private List<Movie> movieList=new ArrayList<>() ;
@@ -81,19 +94,19 @@ public class Showtime {
     // @JoinColumn(name="movieid")
     // private Movie movie;
     @OneToOne
-    @JoinColumn(name="movie")
+    @JoinColumn(name="movie",referencedColumnName = "id")
     private Movie movie;
 
     // @JsonIgnore
-    // @ManyToOne
-    // @JoinColumn(name="theatreid",referencedColumnName = "theatreid")
-    // private Theatre theatre;
-    @OneToOne
-    @JoinColumn(name="theatreid")
+    @ManyToOne
+    @JoinColumn(name="theatre",referencedColumnName = "theatreid")
     private Theatre theatre;
+    // @OneToOne
+    // @JoinColumn(name="theatreid")
+    // private Theatre theatre;
 
     @OneToOne
-    @JoinColumn(name="booking")
+    @JoinColumn(name="showtimeid")
     private Booking booking;
 
     //DONE

@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 // @JsonIdentityInfo(generator =
 // ObjectIdGenerators.PropertyGenerator.class,property = "customerid")
 public class Customer {
-    @Id
+    @Id 
     @GeneratedValue
     private Long customerid;
     private String name;

@@ -12,7 +12,7 @@ import com.movies.fullstackbackend.exception.UserNotFoundException;
 import java.util.List; // Import the List class
 
 
-//@RequestMapping("/customer")
+//@RequestMapping("/customer") 
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class CustomerController {

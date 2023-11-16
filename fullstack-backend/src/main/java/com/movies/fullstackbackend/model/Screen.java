@@ -2,9 +2,9 @@ package com.movies.fullstackbackend.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+// import java.time.LocalTime;
+// import java.util.ArrayList;
+// import java.util.List;
 @Entity
 
 public class Screen {
@@ -37,11 +37,11 @@ public class Screen {
     private Integer capacity;
 
 
-    // @ManyToOne
-    // @JoinColumn(name="theatreid")
-    // private Theatre theatre;
-    @OneToOne
-    @JoinColumn(name="theatre")
+    @ManyToOne
+    @JoinColumn(name="theatre",referencedColumnName = "theatreid")
     private Theatre theatre;
+    // @OneToOne
+    // @JoinColumn(name="theatre")
+    // private Theatre theatre;
 
-}
+} 
