@@ -7,19 +7,20 @@ export default function BookMovie() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [bookedSeats, setBookedSeats] = useState([]);
   const { id } = useParams();
+  const auth = localStorage.getItem("username")
 
+  const fetchBookedSeats = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/bookings");
+      setBookedSeats(response.data);
+    } catch (error) {
+      console.error('Error fetching booked seats: ', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchBookedSeats = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3000/bookmovie/${id}`);
-        setBookedSeats(response.data);
-      } catch (error) {
-        console.error('Error fetching booked seats: ', error);
-      }
-    };
     fetchBookedSeats();
-  }, [id]);
+  },[]);
 
   const handleSeatSelection = (seat) => {
     if (selectedSeats.includes(seat)) {
@@ -33,13 +34,14 @@ export default function BookMovie() {
       const price = calculatePrice(updatedSeats.length);
       setTotalPrice(price);
     }
+    console.log(selectedSeats)
   };
 
   const calculatePrice = (numSeats) => {
     const basePrice = 300;
     return basePrice * numSeats;
   };
-
+  
   const [paymentMethod, setPaymentMethod] = useState('');
 
   const handlePaymentSelection = (e) => {
@@ -47,31 +49,44 @@ export default function BookMovie() {
   }
   const handleBooking = async () => {
     try {
-
+      if(!auth)
+      {
+        alert("Please login")
+      }
+      else{
       // Generate a new paymentID and timestamp
-      const paymentID = generatePaymentID();
+      // const paymentID = generatePaymentID();
       const timestamp = new Date().toISOString();
-
+      console.log(timestamp,auth,id)
       // Make an API call to store the payment information in the backend
-      await axios.post(`http://localhost:3000/bookmovie/${id}`, {
-        paymentID,
-        timestamp,
-        paymentMethod,
-        seats: selectedSeats,
-        totalPrice,
+      const bookingResponse = await axios.post("http://localhost:8080/booking", {
+        "seatnumbers": selectedSeats,
+        //"customer": auth,
+        "showtime": {
+          "showtimeid": Number(id)
+        }
       });
+
+      // Extract the booking ID from the response data
+      const bookingId = bookingResponse.data.bookingId;
+      console.log(bookingId)
+      // Second POST request to send payment information along with the booking ID
+      await axios.post("http://localhost:8080/payment", {
+        //"bookingid": bookingId,
+        //"paymenttimestamp": timestamp,
+        "paymentmethod": paymentMethod,
+        "amount": totalPrice
+      });
+    
 
       setSelectedSeats([]);
       setTotalPrice(0);
       alert('Booking successful!');
+      }
     } catch (error) {
       console.error('Error during booking: ', error);
       alert('Booking failed. Please try again.');
     }
-  };
-
-  const generatePaymentID = () => {
-    return Math.random().toString(36).substr(2, 9);
   };
 
   const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];

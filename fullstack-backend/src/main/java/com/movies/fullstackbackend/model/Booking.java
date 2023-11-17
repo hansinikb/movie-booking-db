@@ -3,7 +3,7 @@ package com.movies.fullstackbackend.model;
 import jakarta.persistence.*;
 
 // import java.util.ArrayList;
-// import java.util.List;
+import java.util.List;
 
 // import com.fasterxml.jackson.annotation.JsonBackReference;
 // import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,7 +14,7 @@ public class Booking {
     @Id
     @GeneratedValue
     private Long bookingid;
-    private String seatnumbers;
+    private List<String> seatnumbers;
     // private Integer numberoftickets;
 
     public Long getBookingid() {
@@ -25,11 +25,11 @@ public class Booking {
         this.bookingid = bookingid;
     }
 
-    public String getSeatnumbers() {
+    public List<String> getSeatnumbers() {
         return seatnumbers;
     }
 
-    public void setSeatnumbers(String seatnumbers) {
+    public void setSeatnumbers(List<String> seatnumbers) {
         this.seatnumbers = seatnumbers;
     }
 

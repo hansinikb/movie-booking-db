@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List; // Import the List class
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("http://localhost:3000") 
 public class PaymentController {
     @Autowired
     private PaymentRepository paymentRepository; // Corrected variable name

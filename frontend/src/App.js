@@ -10,7 +10,7 @@ import ViewMovie from './movies/ViewMovie';
 import BookMovie from './movies/BookMovie';
 import Login from './pages/Login';
 import Register from './pages/Register';
-
+ 
 function App() {
   return (
     <div className="App">

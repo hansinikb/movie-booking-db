@@ -26,7 +26,7 @@ public class BookingController {
         return bookingRepository.save(newBooking);
     }
 
-    @GetMapping("/booking")
+    @GetMapping("/bookings")
     List<Booking> getAllBooking(){
 
         return bookingRepository.findAll(); // Corrected variable name

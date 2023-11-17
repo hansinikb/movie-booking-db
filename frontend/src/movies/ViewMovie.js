@@ -9,7 +9,7 @@ export default function ViewMovie() {
   const {id } = useParams();
   const {title} = movie;
   const [showtimes, setShowtimes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null);
 
   const loadMovie = async () => {
@@ -24,11 +24,11 @@ export default function ViewMovie() {
   const fetchShowtimesAndMovie = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/showtimes`);
-      console.log(response.data)
+      //console.log(response.data)
       const filteredShowtimes = response.data.filter(
         (showtime) => showtime.movie.id.toString() === id
       );
-      console.log(filteredShowtimes)
+      //console.log(filteredShowtimes)
       setShowtimes(filteredShowtimes);
       setLoading(false);
     } catch (error) {
@@ -84,7 +84,7 @@ export default function ViewMovie() {
                         <td>{showtime.date}</td>
                         <td>{showtime.starttime + ' - ' + showtime.endtime}</td>
                         <td>
-                          <button className='btn btn-primary mx-2'>Book</button>
+                          <Link className='btn btn-primary mx-2' to={`/bookmovie/${id}`}>Book</Link>
                         </td>
                       </tr>
                     ))}
