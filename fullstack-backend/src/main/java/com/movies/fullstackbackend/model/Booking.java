@@ -63,14 +63,16 @@ public class Booking {
     // tried commenting
     @ManyToOne
     // @Column(name="customerid")
-    @JoinColumn(name = "customerid", referencedColumnName = "customerid")
+    @JoinColumn(name = "customer", referencedColumnName = "customerid")
     // @JsonBackReference
     private Customer customer;
 
-    @OneToOne(mappedBy = "booking")
+    @OneToOne
+    @JoinColumn(name = "payment", referencedColumnName = "paymentid")
     private Payment payment;
 
-    @OneToOne(mappedBy = "booking")
+    @OneToOne
+    @JoinColumn(name = "showtime", referencedColumnName = "showtimeid")
     private Showtime showtime;
     // @JsonIgnore
     // @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)

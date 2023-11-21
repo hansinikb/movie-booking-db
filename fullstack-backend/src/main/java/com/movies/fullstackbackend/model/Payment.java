@@ -2,7 +2,7 @@ package com.movies.fullstackbackend.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 // import java.time.LocalTime.now;
@@ -12,7 +12,7 @@ public class Payment {
     @Id
     @GeneratedValue
     private Long paymentid;
-    private LocalTime paymenttimestamp;
+    //private LocalDateTime paymenttimestamp;
     private String paymentmethod;
 
     public Long getPaymentid() {
@@ -23,13 +23,13 @@ public class Payment {
         this.paymentid = paymentid;
     }
 
-    public LocalTime getPaymenttimestamp() {
-        return paymenttimestamp;
-    }
+    // public LocalDateTime getPaymenttimestamp() {
+    //     return paymenttimestamp;
+    // }
 
-    public void setPaymenttimestamp(LocalTime paymenttimestamp) {
-        this.paymenttimestamp = paymenttimestamp;
-    }
+    // public void setPaymenttimestamp(LocalDateTime paymenttimestamp) {
+    //     this.paymenttimestamp = paymenttimestamp;
+    // }
 
     public String getPaymentmethod() {
         return paymentmethod;

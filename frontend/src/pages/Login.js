@@ -33,6 +33,7 @@ export default function Login({handleLogin}) {
                 setCustomer(customer);
                 setLoggedIn(true);
                 localStorage.setItem('username', customer.name);
+                localStorage.setItem('userid', customer.customerid);
                 navigate('/')
               } else {
                 // If no matching customer is found, handle it accordingly

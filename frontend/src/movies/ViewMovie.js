@@ -84,7 +84,7 @@ export default function ViewMovie() {
                         <td>{showtime.date}</td>
                         <td>{showtime.starttime + ' - ' + showtime.endtime}</td>
                         <td>
-                          <Link className='btn btn-primary mx-2' to={`/bookmovie/${id}`}>Book</Link>
+                          <Link className='btn btn-primary mx-2' to={`/bookmovie/${showtime.showtimeid}`}>Book</Link>
                         </td>
                       </tr>
                     ))}

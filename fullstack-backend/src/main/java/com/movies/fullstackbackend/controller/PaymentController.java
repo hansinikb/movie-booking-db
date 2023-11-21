@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List; // Import the List class
 
+import java.time.LocalDateTime;
+
 @RestController
 @CrossOrigin("http://localhost:3000") 
 public class PaymentController {
@@ -17,8 +19,8 @@ public class PaymentController {
     //@ResponseBody
     @PostMapping(value="/payment")
     Payment newPayment(@RequestBody Payment newPayment){
-
-        
+        //LocalDateTime timestamp = LocalDateTime.parse(newPayment.getPaymenttimestamp());
+        //newPayment.setPaymenttimestamp(timestamp);
         return paymentRepository.save(newPayment); // Corrected variable name
     }
     @GetMapping("/payments")
@@ -40,7 +42,7 @@ public class PaymentController {
         return paymentRepository.findById(id)
                 .map(payment -> {
 
-                    payment.setPaymenttimestamp(newPayment.getPaymenttimestamp());
+                    //payment.setPaymenttimestamp(newPayment.getPaymenttimestamp());
                     payment.setPaymentmethod(newPayment.getPaymentmethod());
                     payment.setAmount(newPayment.getAmount());
                     // payment.setDiscountname(newPayment.getDiscountname());

@@ -93,7 +93,7 @@ public class Showtime {
     // @ManyToOne
     // @JoinColumn(name="movieid")
     // private Movie movie;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="movie",referencedColumnName = "id")
     private Movie movie;
 

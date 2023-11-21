@@ -7,7 +7,7 @@ export default function BookMovie() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [bookedSeats, setBookedSeats] = useState([]);
   const { id } = useParams();
-  const auth = localStorage.getItem("username")
+  const authid = localStorage.getItem("userid")
 
   const fetchBookedSeats = async () => {
     try {
@@ -49,7 +49,7 @@ export default function BookMovie() {
   }
   const handleBooking = async () => {
     try {
-      if(!auth)
+      if(!authid)
       {
         alert("Please login")
       }
@@ -57,22 +57,25 @@ export default function BookMovie() {
       // Generate a new paymentID and timestamp
       // const paymentID = generatePaymentID();
       const timestamp = new Date().toISOString();
-      console.log(timestamp,auth,id)
+      console.log(timestamp,id)
       // Make an API call to store the payment information in the backend
       const bookingResponse = await axios.post("http://localhost:8080/booking", {
         "seatnumbers": selectedSeats,
-        //"customer": auth,
+        "customer": {
+          "customerid": authid
+        },
         "showtime": {
           "showtimeid": Number(id)
         }
       });
-
       // Extract the booking ID from the response data
-      const bookingId = bookingResponse.data.bookingId;
+      const bookingId = bookingResponse.data.bookingid;
       console.log(bookingId)
       // Second POST request to send payment information along with the booking ID
       await axios.post("http://localhost:8080/payment", {
-        //"bookingid": bookingId,
+        "booking": {
+          "bookingid": bookingId,
+        },
         //"paymenttimestamp": timestamp,
         "paymentmethod": paymentMethod,
         "amount": totalPrice
@@ -140,7 +143,7 @@ export default function BookMovie() {
         <h3><span className="card-body">Total Price: </span> ${totalPrice}</h3>
 
         <select className="form-select m-3 w-50 align-items-center mx-auto" aria-label="Payment method" placeholder='Payment method' onChange={handlePaymentSelection} required >
-          <option value="credit card">Credit Card</option>
+          <option value="credit card" selected>Credit Card</option>
           <option value="cash">Cash</option>
           <option value="upi">UPI</option>
           <option value="online banking">Online Banking</option>
