@@ -12,7 +12,12 @@ export default function BookMovie() {
   const fetchBookedSeats = async () => {
     try {
       const response = await axios.get("http://localhost:8080/bookings");
-      setBookedSeats(response.data);
+      const filteredBookings = response.data.filter(booking => booking.showtime.showtimeid.toString() === id);
+      // Extract seat numbers from the filtered bookings
+      const extractedSeats = filteredBookings.flatMap(booking => booking.seatnumbers);
+      // Set the booked seats in the state variable
+      console.log(extractedSeats)
+      setBookedSeats(extractedSeats);
     } catch (error) {
       console.error('Error fetching booked seats: ', error);
     }
