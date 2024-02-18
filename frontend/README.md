@@ -82,8 +82,8 @@ Adding to booking table:
 ```
 {
   "date": "2023-01-16",
-  "starttime": "18:00:00",
-  "endtime": "20:00:00",
+  "starttime": "18:00",
+  "endtime": "20:00",
   "movie":{
     "id":1
   },
