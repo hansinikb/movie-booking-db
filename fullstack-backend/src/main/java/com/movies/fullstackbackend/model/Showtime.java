@@ -23,11 +23,11 @@ public class Showtime {
     private LocalDate date;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    @JsonFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime starttime;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    @JsonFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime endtime;
 
     public Long getShowtimeid() {
@@ -105,7 +105,7 @@ public class Showtime {
     // @JoinColumn(name="theatreid")
     // private Theatre theatre;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="showtimeid")
     private Booking booking;
 

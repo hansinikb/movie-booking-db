@@ -10,6 +10,8 @@ import ViewMovie from './movies/ViewMovie';
 import BookMovie from './movies/BookMovie';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ViewShowtimes from './showtimes/viewShowtimes';
+import AddShowtime from './showtimes/addShowtime';
  
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route exact path = "/viewmovie/:id" element = {<ViewMovie/>} />
           <Route exact path = "/bookmovie/:id" element = {<BookMovie/>} />
           <Route exact path = "/register" element = {<Register/>}/>
+          <Route exact path = "/viewshowtimes" element = {<ViewShowtimes/>} />
+          <Route exact path = "/addshowtime" element = {<AddShowtime/>} />
         </Routes>
       </Router>
       

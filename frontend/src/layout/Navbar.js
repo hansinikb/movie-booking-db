@@ -20,7 +20,7 @@ export default function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to='/viewMovies'>Showtimes</Link>
+                                <Link className="nav-link active" aria-current="page" to='/viewshowtimes'>Showtimes</Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Venues</a>

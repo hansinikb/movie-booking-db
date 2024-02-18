@@ -148,7 +148,8 @@ export default function BookMovie() {
         <h3><span className="card-body">Total Price: </span> ${totalPrice}</h3>
 
         <select className="form-select m-3 w-50 align-items-center mx-auto" aria-label="Payment method" placeholder='Payment method' onChange={handlePaymentSelection} required >
-          <option value="credit card" selected>Credit Card</option>
+          <option value="">Select mode of payment</option>
+          <option value="credit card">Credit Card</option>
           <option value="cash">Cash</option>
           <option value="upi">UPI</option>
           <option value="online banking">Online Banking</option>

@@ -2,7 +2,7 @@ package com.movies.fullstackbackend.model;
 
 import jakarta.persistence.*;
 
-import java.awt.print.Book;
+import java.awt.print.Book; 
 import java.util.ArrayList;
 import java.util.List;
 
