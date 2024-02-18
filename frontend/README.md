@@ -68,3 +68,27 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Test for backend:
+Adding to theatre table:
+```
+{
+  "name":"Orion Mall",
+  "location": "Bangalore"
+}
+```
+Adding to booking table:
+
+```
+{
+  "date": "2023-01-16",
+  "starttime": "18:00:00",
+  "endtime": "20:00:00",
+  "movie":{
+    "id":1
+  },
+  "theatre":{
+    "theatreid":1
+  }
+}
+```
